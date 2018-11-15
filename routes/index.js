@@ -2,27 +2,7 @@ var express = require('express');
 var router = express.Router();
 let request = require('request');
 var mongoose = require('mongoose');
-
-mongoose.connect('mongodb://localhost/movieDB',{ useNewUrlParser: true });
-
-var movieSchema = mongoose.Schema({
-    userName: String,
-    Movies: [
-        {
-            name: String,
-            imageUrl: String,
-            rating: Number
-        }
-    ]
-});
-
-var Movie = mongoose.model('Movie', movieSchema);
-
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-    console.log('Connected');
-});
+let Movie = mongoose.model('Movie');
 
 let tmdbKey = process.env['TMDBKEY'];
 

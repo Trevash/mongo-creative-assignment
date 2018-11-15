@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="javascript/app.js"></script>
+    <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+    <meta charset="utf-8">
+    <title>Comics!</title>
+</head>
+
+<body>
+    <a href="#">Home</a>
+    <a href="/favorites.html">Favorites</a>
+    <div align='center'><img id='logo' src=''></div>
+    <br/>
+    <div ng-app='' ng-controller='mainCtrl'>
+        <div class="background">
+            <div ng-repeat="movie in movies">
+                <movie movie='movie' />
+            </div>
+        </div>
+        <br/>
+        <form align="center" id="userForm" ng-submit="addNew(userForm)">
+            <h2 style="color:white">Press the button to see more movies!</h4>
+            <br/>
+            <button type='submit'>More</button>
+            <br/>
+        </form>
+    </div>
+</body>

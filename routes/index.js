@@ -14,20 +14,55 @@ router.get('/allMovies', function(req, res, next) { // returns all movies to pag
 })
 
 router.get('/favorites/movies', function(req, res, next) { // Returns json formatted list of favorited movies
+    let userName = req.cookies.name;
+    Movie.find({userName: userName}, function(err, response) {
+        if (err) return console.error(err);
+        console.log(response);
 
+        res.json(response[0].Movies);
+    })
 })
 
 router.get('/favorites', function(req, res, next) { // Returns the favorites html page -- User should be logged in before getting here -- Could just set an angular variable to effectively use a new page. Can use if you want
+
     console.log(req.cookies.name);
     res.sendFile('favorites.html', { root: 'public' });
 })
 
 router.put('/favorites', function(req, res, next) { // Adds movie to list of favorites
-    res.send(200);
+    let userName = req.cookies.name;
+    Movie.find({userName: userName}, function(err, response) {
+        if (err) return console.error(err);
+        if (response.length === 0) {
+            let newFavorite = new Movie({
+                userName: userName,
+                Movies: [
+                    req.body
+                ]
+            })
+            newFavorite.save(function(err, post) {
+              if (err) return console.error(err);
+              console.log(post);
+              res.sendStatus(200);
+            });
+        }
+        else {
+            let movieList = response[0].Movies;
+            movieList.push(req.body);
+            response[0].set({Movies: movieList});
+            response[0].save(function (err, updatedMovieList) {
+                if (err) return next(err);
+                console.log(updatedMovieList)
+                res.sendStatus(200);
+              });
+        }
+    })
 })
 
 router.delete('/favorites/:name', function(req, res, next) { // Removes favorited movie from mongo table for logged in user
     let movieName = req.params.name;
+    let userName = req.cookies.name;
+
 
     res.send(204);
 })
@@ -61,5 +96,10 @@ router.get('/getmovies/:movieName', function(req, res, next) {
 router.get('/', function(req, res, next) {
     res.sendFile('index.html', { root: 'public' });
 });
+
+router.delete('/favorites', function(req, res, next) {
+    Movie.find().remove(function(){});
+    res.sendStatus(204);
+})
 
 module.exports = router;

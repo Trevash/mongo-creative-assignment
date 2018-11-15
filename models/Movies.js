@@ -5,7 +5,6 @@ var movieSchema = mongoose.Schema({
         {
             name: String,
             imageUrl: String,
-            rating: Number
         }
     ]
 });

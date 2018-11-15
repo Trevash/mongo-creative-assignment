@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/fullmeanstack', { useNewUrlParser: true });
+mongoose.connect('mongodb://localhost/movieDB', { useNewUrlParser: true });
 require('./models/Movies');
 var db = mongoose.connection; //Saves the connection as a variable to use
 db.on('error', console.error.bind(console, 'connection error:')); //Checks for connection errors

@@ -6,6 +6,13 @@ let Movie = mongoose.model('Movie');
 
 let tmdbKey = process.env['TMDBKEY'];
 
+router.get('/allMovies', function(req, res, next) { // returns all movies to page
+    Movie.find(function(err, movies){
+        if(err){return next(err);}
+        res.json(movies)
+    })
+})
+
 router.get('/favorites/movies', function(req, res, next) { // Returns json formatted list of favorited movies
 
 })
@@ -28,17 +35,21 @@ router.delete('/favorites/:name', function(req, res, next) { // Removes favorite
 router.get('/getmovies/:movieName', function(req, res, next) {
     let searchParam = req.params.movieName;
     let assembledMovies = [];
-    request('http://api.themoviedb.org/3/search/movie/?api_key=81bd0d6b34320f2063b739e4196079f1&query='+searchParam, function(error, response, body) {
+    request('http://api.themoviedb.org/3/search/movie/?api_key=81bd0d6b34320f2063b739e4196079f1&query=' + searchParam, function(error, response, body) {
         if (error) {
             next(new Error('Error requesting movies from external api:', error));
         }
         let jsonBody = JSON.parse(body);
         for (let i = 0; i < jsonBody.results.length; i++) {
             let title = jsonBody.results[i].title
-            let imageUrl = "http://image.tmdb.org/t/p/w200"+jsonBody.results[i].poster_path;
+            let imageUrl = "http://image.tmdb.org/t/p/w200" + jsonBody.results[i].poster_path;
             assembledMovies.push({
                 title: title,
                 imageUrl: imageUrl
+            })
+            let movie = new Movie({ title: title, imageUrl: imageUrl });
+            movie.save(function(err, move) {
+                if (err) { return next(err); }
             })
         }
 

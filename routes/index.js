@@ -6,26 +6,20 @@ let Movie = mongoose.model('Movie');
 
 let tmdbKey = process.env['TMDBKEY'];
 
-router.get('/allMovies', function(req, res, next) { // returns all movies to page
-    Movie.find(function(err, movies){
-        if(err){return next(err);}
-        res.json(movies)
-    })
-})
-
 router.get('/favorites/movies', function(req, res, next) { // Returns json formatted list of favorited movies
     let userName = req.cookies.name;
     Movie.find({userName: userName}, function(err, response) {
         if (err) return console.error(err);
         console.log(response);
+        if (response.length === 0) {
+            return res.json(response);
+        }
 
         res.json(response[0].Movies);
     })
 })
 
 router.get('/favorites', function(req, res, next) { // Returns the favorites html page -- User should be logged in before getting here -- Could just set an angular variable to effectively use a new page. Can use if you want
-
-    console.log(req.cookies.name);
     res.sendFile('favorites.html', { root: 'public' });
 })
 
@@ -59,12 +53,30 @@ router.put('/favorites', function(req, res, next) { // Adds movie to list of fav
     })
 })
 
-router.delete('/favorites/:name', function(req, res, next) { // Removes favorited movie from mongo table for logged in user
-    let movieName = req.params.name;
+router.delete('/favorites/:movieName', function(req, res, next) { // Removes favorited movie from mongo table for logged in user
+    let movieName = req.params.movieName;
     let userName = req.cookies.name;
 
-
-    res.send(204);
+    Movie.find({userName: userName}, function(err, response) {
+        if (err) return console.error(err);
+        if (response.length === 0) {
+            return res.sendStatus(204)
+        }
+        else {
+            let movieList = response[0].Movies;
+            for (let i = 0; i < movieList.length; i++) {
+                if (movieList[i].name === movieName) {
+                    movieList.splice(i, 1);
+                }
+            }
+            response[0].set({Movies: movieList});
+            response[0].save(function (err, updatedMovieList) {
+                if (err) return next(err);
+                console.log(updatedMovieList)
+                res.sendStatus(204);
+              });
+        }
+    });
 })
 
 router.get('/getmovies/:movieName', function(req, res, next) {

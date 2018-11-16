@@ -3,7 +3,7 @@ var movieSchema = mongoose.Schema({
     userName: String,
     Movies: [
         {
-            name: String,
+            title: String,
             imageUrl: String,
         }
     ]

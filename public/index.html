@@ -1,33 +1,68 @@
 <!DOCTYPE html>
 
 <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.js"></script>
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <script src="javascript/movies.js"></script>
     <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
     <meta charset="utf-8">
     <title>Comics!</title>
+    <script type="text/javascript">
+        function setCookie(cname, cvalue, exdays) {
+            var d = new Date();
+            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+            var expires = "expires="+d.toUTCString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        }
+
+        function getCookie(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for(var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
+        function checkCookie() {
+            var user = getCookie("username");
+            if (user != "") {}
+            else {
+                user = prompt("Please enter your name:", "");
+                if (user != "" && user != null) {
+                    setCookie("username", user, 365);
+                }
+            }
+        }
+    </script>
 </head>
 
-<body>
-    <a href="#">Home</a>
-    <a href="/favorites.html">Favorites</a>
+<body onload="checkCookie()">
+    <a href="/">Home</a>
+    <a href="/favorites">Favorites</a>
     <div align='center'><img id='logo' src=''></div>
     <br/>
     <div ng-app='movie' ng-controller='MainCtrl'>
         <div class="background">
-            <div ng-repeat="m in movies">
-                <showMovies movie='m' />
+            <div style="float: left" ng-repeat="movie in movies">
+                <div ng-click="favoriteMovie(movie)">
+                    <img ng-src="{{movie.imageUrl}}" style="width: 100px; height: 150px;"/>
+                    <h4 class="textBorder">{{movie.title}}</h4>
+                </div>
+                <!-- <showmovies movie='movie' /> -->
             </div>
         </div>
         <br/>
-        <form align="right" id="userForm" ng-submit="addMovie(userForm)">
+        <form align="middle" id="userForm" ng-submit="searchMovie(userForm)">
             <input type="text" ng-model="formContent"></input>
-            <button type="submit">Add Movie</button>
-            <h2 style="color:white" align:"right">Search a new movie to add to the list:</h4>
-            <br/>
-            <button type='submit'>More</button>
-            <br/>
+            <button type="submit">Search Movie</button>
+            <h2 style="color:white" align:"middle">Search a new movie to add to the list:</h4>
         </form>
     </div>
 </body>

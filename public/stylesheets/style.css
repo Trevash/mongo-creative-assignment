@@ -20,6 +20,18 @@
 	  background-color: red;
 	}
 
+	.menuButtons {
+	  background-color: #3B2728;
+	  /* Green */
+	  border-radius: 12px;
+	  color: white;
+	  padding: 10px 20px;
+	  text-align: center;
+	  text-decoration: none;
+	  display: inline-block;
+	  font-size: 16px;
+	}
+
 	.mainPadding {
 	  padding: 50px;
 	}

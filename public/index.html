@@ -47,9 +47,10 @@
 <body onload="checkCookie()" class="backgroundImage">
     <h1 class="textBorders white" align="center">Keep Track of Your Favorite Movies</h1>
     <div class="mainPadding">
-        <a href="/">Home</a>
-        <a href="/favorites">Favorites</a>
+        <a class="menuButtons" href="/">Home</a>
+        <a class="menuButtons" href="/favorites">Favorites</a>
         <div ng-app='movie' ng-controller='MainCtrl'>
+            <br/>
             <form class="white textBorders" id="userForm" ng-submit="searchMovie(userForm)">
                 <input style="color:black" type="text" ng-model="formContent"></input>
                 <button type="submit">Search Movie</button>

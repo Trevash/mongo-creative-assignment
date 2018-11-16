@@ -1,124 +1,153 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
+	body {
+	  padding: 50px;
+	  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+	}
 
-a {
-  color: #00B7FF;
-}
+	a {
+	  color: lime;
+	}
 
-table,
-th,
-td {
-  padding: 25px;
-  border: 2px solid white;
-  border-collapse: collapse;
-  background-color: red;
-}
+	.white {
+	  color: white;
+	}
 
-.grid-container {
-  display: grid;
-  grid-template-columns: auto auto auto auto auto;
-  grid-gap: 10px;
-  background-color: #cccccc;
-  padding: 10px;
-}
+	table,
+	th,
+	td {
+	  padding: 25px;
+	  border: 2px solid white;
+	  border-collapse: collapse;
+	  background-color: red;
+	}
 
-.grid-container>div {
-  /*background-color: rgba(255, 255, 255, 0.8);*/
-  background-color: red;
-  text-align: center;
-  padding: 20px 0;
-  font-size: 30px;
-}
+	.mainPadding {
+	  padding: 50px;
+	}
 
-/*.item1 {*/
+	.textBorders {
+	  text-shadow: 2px 2px 2px 2px black;
+	}
 
-/*  grid-column-start: 1;*/
+	.grid-container {
+	  display: grid;
+	  grid-template-columns: auto auto auto auto;
+	  grid-gap: 10px;
+	  /*background-color: #cccccc;*/
+	  padding: 10px;
+	}
 
-/*  grid-column-end: 5;*/
+	.grid-container>div {
+	  /*background-color: rgba(255, 255, 255, 0.8);*/
+	  /*background-color: red;*/
+	  text-align: center;
+	  padding: 20px 0;
+	  font-size: 30px;
+	}
 
-/*}*/
+	.gridInner {
+	  max-height: 400px;
+	  max-width: 250px;
+	}
 
-body {
-  background-image: url("https://images5.alphacoders.com/481/481123.jpg");
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  top: 0px;
-  left: 0px;
-  z-index: 0;
-}
+	.gridImage {
+	  width: auto;
+	  height: 90%;
+	  object-fit: contain;
+	}
 
-.background {
-  padding-bottom: 40px;
-  padding-left: 40px;
-  padding-right: 40px;
-  padding-top: 40px;
-  background-image: url("http://blog.hostbaby.com/wp-content/uploads/2013/07/scuffedstatic_red_1920x1234.jpg");
-}
+	/*.item1 {*/
 
-td {
-  width: 15%;
-}
+	/*  grid-column-start: 1;*/
 
-img {
-  width: 100%;
-  display: block;
-}
+	/*  grid-column-end: 5;*/
 
-button {
-  background-color: red;
-  border: 1px solid white;
-  border-radius: 12px;
-}
+	/*}*/
 
-.zoom {
-  transition: transform .2s;
-}
+	.backgroundImage {
+	  background-image: url("https://images5.alphacoders.com/481/481123.jpg");
+	  position: absolute;
+	  width: 100%;
+	  height: 100%;
+	  top: 0px;
+	  left: 0px;
+	  z-index: 0;
+	  object-fit: contain;
+	}
 
-.zoom:hover {
-  transform: scale(1.25);
-}
+	.background {
+	  padding-bottom: 40px;
+	  padding-left: 40px;
+	  padding-right: 40px;
+	  padding-top: 40px;
+	  background-image: url("http://blog.hostbaby.com/wp-content/uploads/2013/07/scuffedstatic_red_1920x1234.jpg");
+	  z-index: 1;
+	}
 
-.Comic img {
-  width: 100%;
-  height: 50px;
-  border-radius: 50%;
-}
+	td {
+	  width: 15%;
+	}
 
-#logo {
-  width: 35%;
-  height: auto;
-}
+	/*img {*/
 
-.heart {
-  background-color: red;
-  display: inline-block;
-  height: 30px;
-  margin: 0 10px;
-  position: relative;
-  top: 0;
-  transform: rotate(-45deg);
-  width: 30px;
-}
+	/*  max-width: 100%;*/
 
-.heart:before,
-.heart:after {
-  content: "";
-  background-color: red;
-  border-radius: 50%;
-  height: 30px;
-  position: absolute;
-  width: 30px;
-}
+	/*  max-height: 100%;*/
 
-.heart:before {
-  top: -15px;
-  left: 0;
-}
+	/*}*/
 
-.heart:after {
-  left: 15px;
-  top: 0;
-}
+	button {
+	  background-color: red;
+	  border: 1px solid white;
+	  border-radius: 12px;
+	}
+
+	.zoom {
+	  transition: transform .2s;
+	}
+
+	.zoom:hover {
+	  transform: scale(1.25);
+	}
+
+	.Comic img {
+	  width: 100%;
+	  height: 50px;
+	  border-radius: 50%;
+	}
+
+	#logo {
+	  width: 35%;
+	  height: auto;
+	}
+
+	.heart {
+	  background-color: red;
+	  display: inline-block;
+	  height: 30px;
+	  margin: 0 10px;
+	  position: relative;
+	  top: 0;
+	  transform: rotate(-45deg);
+	  width: 30px;
+	}
+
+	.heart:before,
+	.heart:after {
+	  content: "";
+	  background-color: red;
+	  border-radius: 50%;
+	  height: 30px;
+	  position: absolute;
+	  width: 30px;
+	}
+
+	.heart:before {
+	  top: -15px;
+	  left: 0;
+	}
+
+	.heart:after {
+	  left: 15px;
+	  top: 0;
+	}
+	

@@ -92,7 +92,7 @@ function movieDirective() {
       // "</div>"),
      '<div>' +
      '<div ng-click="favoritemovie()">' +
-     '<img ng-src="{{movie.imageUrl}}" style="width: 100px; height: 150px;"/>' +
+     '<img ng-src="{{movie.imageUrl}}" class="gridImage"/>' +
      '<h4 class="textBorder">{{movie.title}}</h4>' +
      '</div>' +
      '</div>'
